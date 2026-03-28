@@ -29,6 +29,18 @@ async def strtCap(bot, message):
         reply_markup=keyboard
     )
 
+
+@Client.on_message(filters.command("channels"))
+async def channels_info(client, message):
+    total = await total_channels()
+    active = await active_caption_channels()
+
+    await message.reply_text(
+        f"📊 **Channel Stats**\n\n"
+        f"🔹 Total Connected Channels: {total}\n"
+        f"🔹 Auto Caption Active: {active}"
+    )
+
 @Client.on_message(filters.private & filters.user(ADMIN)  & filters.command(["total_users"]))
 async def all_db_users_here(client,message):
     silicon = await message.reply_text("Please Wait....")
