@@ -10,6 +10,14 @@ async def addCap(chnl_id, caption):
     dets = {"chnl_id": chnl_id, "caption": caption}
     await chnl_ids.insert_one(dets)
 
+async def active_caption_channels():
+    count = await chnl_ids.count_documents({"caption": {"$exists": True}})
+    return count
+
+async def total_channels():
+    count = await chnl_ids.count_documents({})
+    return count
+
 
 async def updateCap(chnl_id, caption):
     await chnl_ids.update_one({"chnl_id": chnl_id}, {"$set": {"caption": caption}})
