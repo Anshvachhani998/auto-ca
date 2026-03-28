@@ -7,7 +7,7 @@ import re
 from pyrogram.errors import FloodWait
 from pyrogram.types import *
 
-@Client.on_message(filters.command("start") & filters.private)
+@Client.on_message(filters.private & filters.command("start"))
 async def strtCap(bot, message):
     user_id = int(message.from_user.id)
     await insert(user_id)
